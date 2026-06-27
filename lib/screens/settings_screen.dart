@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'change_password_screen.dart'; // 👈 চেঞ্জ পাসওয়ার্ড স্ক্রিনটি ইম্পোর্ট করা আছে
+import 'change_password_screen.dart';
+import 'privacy_policy_screen.dart';
+import 'terms_and_conditions_screen.dart';
+import 'faq_screen.dart';
+import 'about_us_screen.dart';
+import 'payment_details_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -21,7 +26,7 @@ class SettingsScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: GestureDetector(
-                      onTap: () => Navigator.pop(context), // আগের পেজে ফিরে যাওয়ার জন্য
+                      onTap: () => Navigator.pop(context),
                       child: Container(
                         width: 45,
                         height: 45,
@@ -58,43 +63,47 @@ class SettingsScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Column(
                   children: [
-                    // 👈 এখানে context এবং ইভেন্ট ট্রিগার পাস করা হয়েছে
                     _buildSettingsTile(
                       context,
                       icon: Icons.key_outlined,
                       title: 'Change password',
                       subtitle: 'Change your account password',
-                      isChangePassword: true, // এটি চেঞ্জ পাসওয়ার্ড পেজ ওপেন করবে
+                      isChangePassword: true,
                     ),
                     _buildSettingsTile(
                       context,
                       icon: Icons.credit_card_outlined,
                       title: 'Payment settings',
                       subtitle: 'Manage your payment settings',
+                      isPayment: true,
                     ),
                     _buildSettingsTile(
                       context,
                       icon: Icons.info_outline_rounded,
                       title: 'About us',
                       subtitle: 'See our about us here',
+                      isAboutUs: true,
                     ),
                     _buildSettingsTile(
                       context,
                       icon: Icons.shield_outlined,
                       title: 'Privacy policy',
                       subtitle: 'See our privacy policy here',
+                      isPrivacyPolicy: true,
                     ),
                     _buildSettingsTile(
                       context,
                       icon: Icons.menu_book_outlined,
                       title: 'Terms & Conditions',
                       subtitle: 'See our terms & conditions here',
+                      isTerms: true,
                     ),
                     _buildSettingsTile(
                       context,
                       icon: Icons.help_outline_rounded,
                       title: 'FAQ',
                       subtitle: 'See frequently asked questions here',
+                      isFaq: true,
                     ),
                     const SizedBox(height: 24),
                   ],
@@ -109,21 +118,53 @@ class SettingsScreen extends StatelessWidget {
 
   // কাস্টম সেটিংস লিস্ট টাইল বিল্ডার (ফিক্সড ও আপডেটেড)
   Widget _buildSettingsTile(
-      BuildContext context, { // 👈 নেভিগেশনের জন্য context যুক্ত করা হয়েছে
+      BuildContext context, {
         required IconData icon,
         required String title,
         required String subtitle,
-        bool isChangePassword = false, // 👈 নতুন প্যারামিটার
+        bool isChangePassword = false,
+        bool isPrivacyPolicy = false,
+        bool isTerms = false,
+        bool isFaq = false,
+        bool isAboutUs = false,
+        bool isPayment = false,
       }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: InkWell(
         onTap: () {
-          // 👈 যদি চেঞ্জ পাসওয়ার্ড অপশনে ক্লিক করা হয়, তবে পাসওয়ার্ড স্ক্রিন ওপেন হবে
           if (isChangePassword) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const ChangePasswordScreen()),
+            );
+          } else if (isPrivacyPolicy) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PrivacyPolicyScreen()),
+            );
+          } else if (isTerms) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const TermsAndConditionsScreen()),
+            );
+          }
+          else if (isFaq) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const FaqScreen()),
+            );
+          }
+          else if (isAboutUs) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AboutUsScreen()),
+            );
+          }
+          else if (isPayment) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PaymentDetailsScreen()),
             );
           }
         },
@@ -132,7 +173,7 @@ class SettingsScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Row(
             children: [
-              // আইকন কন্টেইনার (হুবху গোল এবং সাদা ব্যাকগ্রাউন্ড)
+              // আইকন কন্টেইনার
               Container(
                 width: 48,
                 height: 48,

@@ -63,3 +63,7 @@ flutter:
     - assets/images/google.png
     - assets/images/profile.png
     - assets/images/password.jpg
+    - assets/images/terms.png
+    - assets/images/faq.png
+    - assets/images/about_us.png
+    - assets/images/trash.png
